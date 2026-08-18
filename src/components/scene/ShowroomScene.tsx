@@ -28,6 +28,7 @@ import { Dishwasher } from './furniture/Dishwasher'
 import type { InteractiveObjectHandle } from './InteractiveObject'
 import { useInteractionStore } from '../../store/interactionStore'
 import { PlayerMovement } from './PlayerMovement'
+import { PlayerTracker } from './PlayerTracker'
 
 const keyboardMap = [
   { name: 'forward', keys: ['KeyW', 'ArrowUp'] },
@@ -140,6 +141,7 @@ export function ShowroomScene({ controlsEnabled }: ShowroomSceneProps) {
 
       <CameraController enabled={exploring} />
       <PlayerMovement active={exploring} />
+      <PlayerTracker active={exploring} />
       <InteractionManager
         enabled={exploring}
         interactiveRefs={interactiveRefs}

@@ -3,10 +3,12 @@ import { ShowroomScene } from './components/scene/ShowroomScene'
 import { Crosshair } from './components/ui/Crosshair'
 import { ProductModal } from './components/ui/ProductModal'
 import { WishlistPanel } from './components/ui/WishlistPanel'
+import { MiniMap } from './components/ui/MiniMap'
 import { StartOverlay } from './components/ui/StartOverlay'
 import { PointerLockBanner } from './components/ui/PointerLockBanner'
 import { useInteractionStore } from './store/interactionStore'
 import { CATEGORY_LABELS } from './types'
+import { resumeAudio } from './services/soundManager'
 
 export default function App() {
   const [started, setStarted] = useState(false)
@@ -23,6 +25,7 @@ export default function App() {
 
   const handleStart = useCallback(() => {
     setStarted(true)
+    resumeAudio()
     requestAnimationFrame(requestCanvasLock)
   }, [requestCanvasLock])
 
@@ -62,6 +65,8 @@ export default function App() {
       {started && !anyOverlayOpen && isPointerLocked && (
         <Crosshair active={!!hoveredCategory} />
       )}
+
+      <MiniMap visible={started && !anyOverlayOpen} />
 
       {started && isPointerLocked && !anyOverlayOpen && (
         <div className="pointer-events-none fixed bottom-6 left-1/2 z-10 -translate-x-1/2 rounded-full bg-black/50 px-4 py-2 text-sm text-white/90 backdrop-blur">

@@ -22,6 +22,12 @@ interface InteractionState {
   openProductModal: (category: FurnitureCategory) => Promise<void>
   closeProductModal: () => void
 
+  // Player transform for the minimap — updated ~10x/sec from PlayerTracker, not every frame.
+  playerX: number
+  playerZ: number
+  playerYaw: number
+  setPlayerTransform: (x: number, z: number, yaw: number) => void
+
   // Wishlist — quiet "add for later" flow triggered by the E key
   wishlist: WishlistItem[]
   pendingWishlistCategory: FurnitureCategory | null
@@ -47,6 +53,11 @@ export const useInteractionStore = create<InteractionState>((set, get) => ({
     set({ hoveredObjectId: id, hoveredCategory: category }),
 
   setPointerLocked: (locked) => set({ isPointerLocked: locked }),
+
+  playerX: 0,
+  playerZ: 3,
+  playerYaw: 0,
+  setPlayerTransform: (x, z, yaw) => set({ playerX: x, playerZ: z, playerYaw: yaw }),
 
   openProductModal: async (category) => {
     set({

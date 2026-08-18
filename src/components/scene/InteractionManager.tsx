@@ -3,6 +3,7 @@ import { useThree, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import type { FurnitureCategory } from '../../types'
 import { useInteractionStore } from '../../store/interactionStore'
+import { playBuyClick, playAddToList, playPanelToggle } from '../../services/soundManager'
 
 interface InteractionManagerProps {
   enabled: boolean
@@ -65,6 +66,7 @@ export function InteractionManager({
 
     selectingRef.current = true
     window.getSelection()?.removeAllRanges()
+    playBuyClick()
 
     if (document.pointerLockElement) {
       document.exitPointerLock()
@@ -83,6 +85,7 @@ export function InteractionManager({
   const addHoveredToWishlist = () => {
     const target = hoveredRef.current
     if (!target || !enabledRef.current || modalOpenRef.current) return false
+    playAddToList()
     void addToWishlist(target.category)
     return true
   }
@@ -90,6 +93,7 @@ export function InteractionManager({
   // Tab — open/close the wishlist panel to review and buy the saved items.
   const toggleWishlistPanel = () => {
     if (!enabledRef.current || modalOpenRef.current) return
+    playPanelToggle()
     if (!wishlistOpenRef.current && document.pointerLockElement) {
       document.exitPointerLock()
     }
