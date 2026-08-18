@@ -2,6 +2,11 @@ import { create } from 'zustand'
 import type { FurnitureCategory, Product, ProductSource } from '../types'
 import { fetchProductsByCategory } from '../services/productService'
 
+export interface WishlistItem {
+  product: Product
+  category: FurnitureCategory
+}
+
 interface InteractionState {
   hoveredObjectId: string | null
   hoveredCategory: FurnitureCategory | null
@@ -16,9 +21,18 @@ interface InteractionState {
   setPointerLocked: (locked: boolean) => void
   openProductModal: (category: FurnitureCategory) => Promise<void>
   closeProductModal: () => void
+
+  // Wishlist — quiet "add for later" flow triggered by the E key
+  wishlist: WishlistItem[]
+  pendingWishlistCategory: FurnitureCategory | null
+  isWishlistOpen: boolean
+  addToWishlist: (category: FurnitureCategory) => Promise<void>
+  removeFromWishlist: (category: FurnitureCategory) => void
+  toggleWishlist: () => void
+  closeWishlist: () => void
 }
 
-export const useInteractionStore = create<InteractionState>((set) => ({
+export const useInteractionStore = create<InteractionState>((set, get) => ({
   hoveredObjectId: null,
   hoveredCategory: null,
   selectedCategory: null,
@@ -63,4 +77,38 @@ export const useInteractionStore = create<InteractionState>((set) => ({
       productSource: null,
       fetchNotice: null,
     }),
+
+  wishlist: [],
+  pendingWishlistCategory: null,
+  isWishlistOpen: false,
+
+  addToWishlist: async (category) => {
+    const already = get().wishlist.some((item) => item.category === category)
+    if (already || get().pendingWishlistCategory === category) return
+
+    set({ pendingWishlistCategory: category })
+
+    try {
+      const { products } = await fetchProductsByCategory(category)
+      const top = products[0]
+      if (!top) return
+
+      set((state) =>
+        state.wishlist.some((item) => item.category === category)
+          ? state
+          : { wishlist: [...state.wishlist, { product: top, category }] },
+      )
+    } finally {
+      set({ pendingWishlistCategory: null })
+    }
+  },
+
+  removeFromWishlist: (category) =>
+    set((state) => ({
+      wishlist: state.wishlist.filter((item) => item.category !== category),
+    })),
+
+  toggleWishlist: () => set((state) => ({ isWishlistOpen: !state.isWishlistOpen })),
+
+  closeWishlist: () => set({ isWishlistOpen: false }),
 }))

@@ -38,6 +38,9 @@ export function InteractionManager({
   const openProductModal = useInteractionStore((s) => s.openProductModal)
   const isModalOpen = useInteractionStore((s) => s.isModalOpen)
   const isPointerLocked = useInteractionStore((s) => s.isPointerLocked)
+  const addToWishlist = useInteractionStore((s) => s.addToWishlist)
+  const toggleWishlist = useInteractionStore((s) => s.toggleWishlist)
+  const isWishlistOpen = useInteractionStore((s) => s.isWishlistOpen)
 
   const hoveredRef = useRef<{ id: string; category: FurnitureCategory } | null>(
     null,
@@ -45,12 +48,15 @@ export function InteractionManager({
   const enabledRef = useRef(enabled)
   const modalOpenRef = useRef(isModalOpen)
   const pointerLockedRef = useRef(isPointerLocked)
+  const wishlistOpenRef = useRef(isWishlistOpen)
   const selectingRef = useRef(false)
 
   enabledRef.current = enabled
   modalOpenRef.current = isModalOpen
   pointerLockedRef.current = isPointerLocked
+  wishlistOpenRef.current = isWishlistOpen
 
+  // Click — go straight to the buy flow for the item under the crosshair.
   const selectHovered = () => {
     const target = hoveredRef.current
     if (!target || !enabledRef.current || modalOpenRef.current || selectingRef.current) {
@@ -73,8 +79,25 @@ export function InteractionManager({
     return true
   }
 
+  // E — quietly add the item to the corner wishlist without leaving the walkthrough.
+  const addHoveredToWishlist = () => {
+    const target = hoveredRef.current
+    if (!target || !enabledRef.current || modalOpenRef.current) return false
+    void addToWishlist(target.category)
+    return true
+  }
+
+  // Tab — open/close the wishlist panel to review and buy the saved items.
+  const toggleWishlistPanel = () => {
+    if (!enabledRef.current || modalOpenRef.current) return
+    if (!wishlistOpenRef.current && document.pointerLockElement) {
+      document.exitPointerLock()
+    }
+    toggleWishlist()
+  }
+
   useFrame(() => {
-    if (!enabled || isModalOpen) {
+    if (!enabled || isModalOpen || isWishlistOpen) {
       if (hoveredObjectId) setHovered(null, null)
       hoveredRef.current = null
       return
@@ -123,10 +146,18 @@ export function InteractionManager({
     }
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.code !== 'KeyE') return
-      if (!pointerLockedRef.current || !hoveredRef.current) return
-      event.preventDefault()
-      selectHovered()
+      if (event.code === 'KeyE') {
+        if (!pointerLockedRef.current || !hoveredRef.current) return
+        event.preventDefault()
+        addHoveredToWishlist()
+        return
+      }
+
+      if (event.code === 'Tab') {
+        // Prevent the browser from shifting focus out of the canvas.
+        event.preventDefault()
+        toggleWishlistPanel()
+      }
     }
 
     window.addEventListener('mousedown', onMouseDown, true)
@@ -137,7 +168,7 @@ export function InteractionManager({
       window.removeEventListener('mouseup', onMouseUp, true)
       window.removeEventListener('keydown', onKeyDown)
     }
-  }, [openProductModal])
+  }, [openProductModal, addToWishlist, toggleWishlist])
 
   return null
 }
