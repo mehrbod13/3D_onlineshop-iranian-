@@ -1,13 +1,17 @@
-import { forwardRef } from 'react'
+import { forwardRef } from "react";
 import {
   InteractiveObject,
   type InteractiveObjectHandle,
-} from '../InteractiveObject'
-import { GLTFFurniture, PlaceholderBox, preloadFurnitureModel } from '../GLTFFurniture'
-import { MODEL_PATHS } from '../modelPaths'
-import { BEDROOM } from '../layout'
+} from "../InteractiveObject";
+import {
+  GLTFFurniture,
+  PlaceholderBox,
+  preloadFurnitureModel,
+} from "../GLTFFurniture";
+import { MODEL_PATHS } from "../modelPaths";
+import { BEDROOM } from "../layout";
 
-preloadFurnitureModel(MODEL_PATHS.bed)
+preloadFurnitureModel(MODEL_PATHS.bed);
 
 export const Bed = forwardRef<InteractiveObjectHandle>(function Bed(_, ref) {
   return (
@@ -21,10 +25,12 @@ export const Bed = forwardRef<InteractiveObjectHandle>(function Bed(_, ref) {
     >
       <GLTFFurniture
         src={MODEL_PATHS.bed}
-        scale={1}
+        autoFit={[2.0, 0.7, 1.5]}
         offset={[0, 0, 0]}
-        fallback={<PlaceholderBox size={[2.0, 0.7, 1.5]} position={[0, 0.35, 0]} />}
+        fallback={
+          <PlaceholderBox size={[2.0, 0.7, 1.5]} position={[0, 0.35, 0]} />
+        }
       />
     </InteractiveObject>
-  )
-})
+  );
+});
