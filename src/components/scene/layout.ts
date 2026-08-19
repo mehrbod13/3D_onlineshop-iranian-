@@ -30,8 +30,8 @@ export const BEDROOM = {
   bed: [6, 0, 4.8] as [number, number, number],       
   
   // پاتختی دقیقاً در سمت چپ تخت (فضای باز اتاق) و هم‌تراز با بالای تخت تنظیم شد
-  sideTable: [5, 0, 5.5] as [number, number, number], 
+  sideTable: [4.8, 0, 5.5] as [number, number, number], 
   
   // ماشین لباسشویی به دورترین گوشه اتاق منتقل شد تا فضای مفید وسط اتاق رو اشغال نکنه
-  washer: [6.3, 0, 0.2] as [number, number, number],    
+  washer: [6.35, 0, 0.85] as [number, number, number],    
 }

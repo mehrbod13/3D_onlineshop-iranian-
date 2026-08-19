@@ -20,7 +20,7 @@ export const DiningTable = forwardRef<InteractiveObjectHandle>(
       >
         <GLTFFurniture
           src={MODEL_PATHS.diningTable}
-          scale={1}
+          scale={1.6}
           offset={[0, 0, 0]}
           fallback={<PlaceholderBox size={[1.6, 0.78, 0.9]} position={[0, 0.39, 0]} />}
         />

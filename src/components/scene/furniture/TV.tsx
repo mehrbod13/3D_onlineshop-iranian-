@@ -15,11 +15,11 @@ export const TV = forwardRef<InteractiveObjectHandle>(function TV(_, ref) {
       id="tv-main"
       category="tv"
       label="تلویزیون"
-      position={[0, 1.35, -4.2]}
+      position={[0, 0.8, -4.2]}
     >
       <GLTFFurniture
         src={MODEL_PATHS.tv}
-        scale={1}
+        scale={0.1}
         offset={[0, 0, 0]}
         fallback={<PlaceholderBox size={[2.2, 1.25, 0.07]} position={[0, 0, 0]} />}
       />

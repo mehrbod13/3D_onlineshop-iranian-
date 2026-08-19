@@ -17,12 +17,12 @@ export const KitchenCabinets = forwardRef<InteractiveObjectHandle>(
         id="cabinets-main"
         category="kitchenCabinets"
         label="کابینت آشپزخانه"
-        position={[KITCHEN_X, 0, KITCHEN_Z.cabinets]}
-        rotation={[0, 0, 0]}
+        position={[KITCHEN_X + 0.3, 0, KITCHEN_Z.cabinets]}
+        rotation={[0, Math.PI / 1.5, 0]}
       >
         <GLTFFurniture
           src={MODEL_PATHS.kitchenCabinets}
-          scale={1}
+          autoFit={[5.0, 1, 1.0]}
           offset={[0, 0, 0]}
           fallback={<PlaceholderBox size={[0.6, 2.6, 3.5]} position={[0, 1.0, 0]} />}
         />

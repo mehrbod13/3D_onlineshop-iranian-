@@ -16,12 +16,12 @@ export const Fridge = forwardRef<InteractiveObjectHandle>(function Fridge(_, ref
       id="fridge-main"
       category="fridge"
       label="یخچال"
-      position={[KITCHEN_X, 0, KITCHEN_Z.fridge]}
-      rotation={[0, -Math.PI, 0]}
+      position={[KITCHEN_X + 0.18, 0, KITCHEN_Z.fridge - 0.3]}
+      rotation={[0, Math.PI / 2, 0]}
     >
       <GLTFFurniture
         src={MODEL_PATHS.fridge}
-        scale={1}
+        scale={2.5}
         offset={[0, 0, 0]}
         fallback={<PlaceholderBox size={[0.7, 2.0, 0.68]} position={[0, 1.0, 0]} />}
       />

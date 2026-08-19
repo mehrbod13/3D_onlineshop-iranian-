@@ -18,11 +18,11 @@ export const SideTable = forwardRef<InteractiveObjectHandle>(
         category="sideTable"
         label="میز کناری"
         position={BEDROOM.sideTable}
-        rotation={[0, -Math.PI / 2, 0]}
+        rotation={[0, -Math.PI, 0]}
       >
         <GLTFFurniture
           src={MODEL_PATHS.sideTable}
-          scale={1}
+          scale={0.8}
           offset={[0, 0, 0]}
           fallback={<PlaceholderBox size={[0.45, 0.5, 0.45]} position={[0, 0.25, 0]} />}
         />

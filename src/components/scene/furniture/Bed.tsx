@@ -21,12 +21,12 @@ export const Bed = forwardRef<InteractiveObjectHandle>(function Bed(_, ref) {
       category="bed"
       label="تخت خواب"
       position={BEDROOM.bed}
-      rotation={[0, -Math.PI / 2, 0]}
+      rotation={[0, -Math.PI, 0]}
     >
       <GLTFFurniture
         src={MODEL_PATHS.bed}
-        autoFit={[2.0, 0.7, 1.5]}
-        offset={[0, 0, 0]}
+        autoFit={[3, 0.7, 1.5]}
+        offset={[0, 0, 0.5]}
         fallback={
           <PlaceholderBox size={[2.0, 0.7, 1.5]} position={[0, 0.35, 0]} />
         }

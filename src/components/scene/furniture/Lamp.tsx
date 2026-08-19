@@ -19,7 +19,7 @@ export const Lamp = forwardRef<InteractiveObjectHandle>(function Lamp(_, ref) {
     >
       <GLTFFurniture
         src={MODEL_PATHS.lamp}
-        scale={1}
+        scale={0.4}
         offset={[0, 0, 0]}
         fallback={<PlaceholderBox size={[0.4, 1.6, 0.4]} position={[0, 0.8, 0]} />}
       />

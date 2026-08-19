@@ -23,7 +23,7 @@ export const WashingMachine = forwardRef<InteractiveObjectHandle>(
       >
         <GLTFFurniture
           src={MODEL_PATHS.washingMachine}
-          scale={1}
+          autoFit={[0.9, 0.5, 0.9]}
           offset={[0, 0, 0]}
           fallback={<PlaceholderBox size={[0.6, 0.9, 0.6]} position={[0, 0.45, 0]} />}
         />

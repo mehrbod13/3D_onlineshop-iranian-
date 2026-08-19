@@ -18,9 +18,10 @@ function ChairSlot({ position, rotation = [0, 0, 0] }: ChairSlotProps) {
     <group position={position} rotation={rotation}>
       <GLTFFurniture
         src={MODEL_PATHS.chair}
-        scale={1}
+        autoFit={[0.9, 0.4, 0.6]}
         offset={[0, 0, 0]}
         fallback={<PlaceholderBox size={[0.42, 0.9, 0.42]} position={[0, 0.45, 0]} />}
+        
       />
     </group>
   )
@@ -38,10 +39,10 @@ export const DiningChairs = forwardRef<InteractiveObjectHandle>(
         label="صندلی"
         position={[1.2, 0, 2.2]}
       >
-        <ChairSlot position={[-0.85, 0, 0.55]} rotation={[0, Math.PI, 0]} />
-        <ChairSlot position={[0.85, 0, 0.55]} rotation={[0, Math.PI, 0]} />
-        <ChairSlot position={[-0.85, 0, -0.55]} />
-        <ChairSlot position={[0.85, 0, -0.55]} />
+        <ChairSlot position={[-0.85, 0, 1]} rotation={[0, Math.PI / 1.3, 0]} />
+        <ChairSlot position={[0.85, 0, 1]} rotation={[0, -Math.PI / 1.3, 0]} />
+        <ChairSlot position={[-0.85, 0, -1]} rotation={[0, Math.PI / 3.5, 0]}/>
+        <ChairSlot position={[0.85, 0, -1]} rotation={[0, -Math.PI / 4, 0]}/>
       </InteractiveObject>
     )
   },

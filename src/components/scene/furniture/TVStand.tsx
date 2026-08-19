@@ -16,10 +16,11 @@ export const TVStand = forwardRef<InteractiveObjectHandle>(function TVStand(_, r
       category="tvStand"
       label="میز تلویزیون"
       position={[0, 0, -4.2]}
+      rotation={[0, 3.31, 0]}
     >
       <GLTFFurniture
         src={MODEL_PATHS.tvStand}
-        scale={1}
+        autoFit={[2.0, 0.5, 1.0]}
         offset={[0, 0, 0]}
         fallback={<PlaceholderBox size={[2.6, 0.55, 0.55]} position={[0, 0.28, 0]} />}
       />

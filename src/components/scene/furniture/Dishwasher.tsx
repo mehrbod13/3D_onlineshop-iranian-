@@ -17,12 +17,12 @@ export const Dishwasher = forwardRef<InteractiveObjectHandle>(
         id="dishwasher-main"
         category="dishwasher"
         label="ماشین ظرفشویی"
-        position={[KITCHEN_X, 0, KITCHEN_Z.dishwasher]}
-        rotation={[0, -Math.PI, 0]}
+        position={[KITCHEN_X + 0.25, 0, KITCHEN_Z.dishwasher - 0.02]}
+        rotation={[0, -Math.PI / 2, 0]}
       >
         <GLTFFurniture
           src={MODEL_PATHS.dishwasher}
-          scale={1}
+          autoFit={[0.7, 0.5, 0.94]}
           offset={[0, 0, 0]}
           fallback={<PlaceholderBox size={[0.58, 0.84, 0.58]} position={[0, 0.42, 0]} />}
         />

@@ -16,11 +16,12 @@ export const CoffeeTable = forwardRef<InteractiveObjectHandle>(
         id="coffee-table"
         category="coffeeTable"
         label="میز جلو مبلی"
-        position={[-2, 0, -0.5]}
+        position={[-2.5, 0, -0.8]}
+        rotation={[0, Math.PI / 5, 0]}
       >
         <GLTFFurniture
           src={MODEL_PATHS.coffeeTable}
-          scale={1}
+          autoFit={[1.5, 0.5, 1.0]}
           offset={[0, 0, 0]}
           fallback={<PlaceholderBox size={[1.2, 0.4, 0.7]} position={[0, 0.2, 0]} />}
         />

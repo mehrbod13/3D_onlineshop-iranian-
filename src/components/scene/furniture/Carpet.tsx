@@ -36,7 +36,7 @@ export const Carpet = forwardRef<InteractiveObjectHandle>(function Carpet(_, ref
     >
       <GLTFFurniture
         src={MODEL_PATHS.carpet}
-        scale={1}
+        autoFit={[1.0, 0.5, 5.0]}
         offset={[0, 0, 0]}
         fallback={<CarpetFallback />}
       />

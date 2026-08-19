@@ -19,7 +19,7 @@ export const Plant = forwardRef<InteractiveObjectHandle>(function Plant(_, ref) 
     >
       <GLTFFurniture
         src={MODEL_PATHS.plant}
-        scale={1}
+        scale={0.2}
         offset={[0, 0, 0]}
         fallback={<PlaceholderBox size={[0.5, 1.0, 0.5]} position={[0, 0.5, 0]} />}
       />

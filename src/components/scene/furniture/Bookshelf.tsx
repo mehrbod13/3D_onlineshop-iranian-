@@ -17,7 +17,7 @@ export const Bookshelf = forwardRef<InteractiveObjectHandle>(
         category="bookshelf"
         label="قفسه کتاب"
         position={[-6.6, 0, 2]}
-        rotation={[0, 0, 0]}
+        rotation={[0, Math.PI / 2, 0]}
       >
         <GLTFFurniture
           src={MODEL_PATHS.bookshelf}

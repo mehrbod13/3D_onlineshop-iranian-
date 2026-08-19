@@ -17,12 +17,12 @@ export const Microwave = forwardRef<InteractiveObjectHandle>(
         id="microwave-main"
         category="microwave"
         label="مایکروویو"
-        position={[KITCHEN_X, 0, KITCHEN_Z.microwave]}
-        rotation={[0, -Math.PI, 0]}
+        position={[KITCHEN_X + 0.2, 1, KITCHEN_Z.microwave - 1.3]}
+        rotation={[0, -Math.PI / 2, 0]}
       >
         <GLTFFurniture
           src={MODEL_PATHS.microwave}
-          scale={1}
+          autoFit={[1.0, 0.5, 1.0]}
           offset={[0, 0, 0]}
           fallback={
             <PlaceholderBox size={[0.48, 0.32, 0.55]} position={[0, COUNTER_Y + 0.16, 0]} />
