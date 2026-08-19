@@ -3,10 +3,10 @@ import {
   InteractiveObject,
   type InteractiveObjectHandle,
 } from '../InteractiveObject'
-import { createClayMaterial } from '../materials'
+import { GLTFFurniture, PlaceholderBox, preloadFurnitureModel } from '../GLTFFurniture'
+import { MODEL_PATHS } from '../modelPaths'
 
-const topMat = createClayMaterial('#e8e0d6')
-const legMat = createClayMaterial('#d0c8be')
+preloadFurnitureModel(MODEL_PATHS.coffeeTable)
 
 export const CoffeeTable = forwardRef<InteractiveObjectHandle>(
   function CoffeeTable(_, ref) {
@@ -18,21 +18,12 @@ export const CoffeeTable = forwardRef<InteractiveObjectHandle>(
         label="میز جلو مبلی"
         position={[-2, 0, -0.5]}
       >
-        <mesh material={topMat} position={[0, 0.38, 0]} castShadow receiveShadow>
-          <boxGeometry args={[1.2, 0.06, 0.7]} />
-        </mesh>
-        {(
-          [
-            [-0.5, 0.19, -0.25],
-            [0.5, 0.19, -0.25],
-            [-0.5, 0.19, 0.25],
-            [0.5, 0.19, 0.25],
-          ] as [number, number, number][]
-        ).map((pos, i) => (
-          <mesh key={i} material={legMat} position={pos} castShadow>
-            <cylinderGeometry args={[0.04, 0.04, 0.38, 8]} />
-          </mesh>
-        ))}
+        <GLTFFurniture
+          src={MODEL_PATHS.coffeeTable}
+          scale={1}
+          offset={[0, 0, 0]}
+          fallback={<PlaceholderBox size={[1.2, 0.4, 0.7]} position={[0, 0.2, 0]} />}
+        />
       </InteractiveObject>
     )
   },

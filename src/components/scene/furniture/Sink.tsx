@@ -3,11 +3,11 @@ import {
   InteractiveObject,
   type InteractiveObjectHandle,
 } from '../InteractiveObject'
-import { createClayMaterial } from '../materials'
+import { GLTFFurniture, PlaceholderBox, preloadFurnitureModel } from '../GLTFFurniture'
+import { MODEL_PATHS } from '../modelPaths'
 import { COUNTER_Y, KITCHEN_X, KITCHEN_Z } from '../layout'
 
-const metalMat = createClayMaterial('#c8ccd0')
-const basinMat = createClayMaterial('#a8b0b8')
+preloadFurnitureModel(MODEL_PATHS.sink)
 
 export const Sink = forwardRef<InteractiveObjectHandle>(function Sink(_, ref) {
   return (
@@ -19,15 +19,12 @@ export const Sink = forwardRef<InteractiveObjectHandle>(function Sink(_, ref) {
       position={[KITCHEN_X, 0, KITCHEN_Z.sink]}
       rotation={[0, -Math.PI / 2, 0]}
     >
-      <mesh material={metalMat} position={[0, COUNTER_Y + 0.01, 0]} castShadow>
-        <boxGeometry args={[0.7, 0.06, 0.45]} />
-      </mesh>
-      <mesh material={basinMat} position={[0, COUNTER_Y - 0.04, 0]} castShadow>
-        <boxGeometry args={[0.55, 0.08, 0.35]} />
-      </mesh>
-      <mesh material={metalMat} position={[0.25, COUNTER_Y + 0.15, -0.1]} castShadow>
-        <cylinderGeometry args={[0.02, 0.02, 0.22, 8]} />
-      </mesh>
+      <GLTFFurniture
+        src={MODEL_PATHS.sink}
+        scale={1}
+        offset={[0, 0, 0]}
+        fallback={<PlaceholderBox size={[0.7, 0.15, 0.45]} position={[0, COUNTER_Y, 0]} />}
+      />
     </InteractiveObject>
   )
 })

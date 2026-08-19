@@ -3,10 +3,11 @@ import {
   InteractiveObject,
   type InteractiveObjectHandle,
 } from '../InteractiveObject'
-import { createClayMaterial } from '../materials'
+import { GLTFFurniture, PlaceholderBox, preloadFurnitureModel } from '../GLTFFurniture'
+import { MODEL_PATHS } from '../modelPaths'
 import { BEDROOM } from '../layout'
 
-const woodMat = createClayMaterial('#ddd5cb')
+preloadFurnitureModel(MODEL_PATHS.sideTable)
 
 export const SideTable = forwardRef<InteractiveObjectHandle>(
   function SideTable(_, ref) {
@@ -19,12 +20,12 @@ export const SideTable = forwardRef<InteractiveObjectHandle>(
         position={BEDROOM.sideTable}
         rotation={[0, -Math.PI / 2, 0]}
       >
-        <mesh material={woodMat} position={[0, 0.5, 0]} castShadow receiveShadow>
-          <boxGeometry args={[0.45, 0.06, 0.45]} />
-        </mesh>
-        <mesh material={woodMat} position={[0, 0.25, 0]} castShadow>
-          <boxGeometry args={[0.08, 0.5, 0.08]} />
-        </mesh>
+        <GLTFFurniture
+          src={MODEL_PATHS.sideTable}
+          scale={1}
+          offset={[0, 0, 0]}
+          fallback={<PlaceholderBox size={[0.45, 0.5, 0.45]} position={[0, 0.25, 0]} />}
+        />
       </InteractiveObject>
     )
   },

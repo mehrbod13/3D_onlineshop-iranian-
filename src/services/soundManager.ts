@@ -64,7 +64,7 @@ function tone(freq: number, duration: number, opts: ToneOptions = {}, delay = 0)
 /** Footstep tap — pitch jitters a bit so a walk cycle doesn't sound robotic. */
 export function playFootstep() {
   const freq = 85 + Math.random() * 25
-  tone(freq, 0.11, { type: 'triangle', gain: 0.1, glideTo: freq * 0.6 })
+  tone(freq, 0.12, { type: 'triangle', gain: 0.19, glideTo: freq * 0.6 })
 }
 
 /** Two-note "confirm" chime — click on an item, headed to the buy modal. */

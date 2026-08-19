@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { Suspense, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { ContactShadows, KeyboardControls } from '@react-three/drei'
 import * as THREE from 'three'
@@ -111,25 +111,27 @@ export function ShowroomScene({ controlsEnabled }: ShowroomSceneProps) {
 
       <Apartment />
 
-      <Sofa ref={sofaRef} />
-      <Lamp ref={lampRef} />
-      <TVStand ref={tvStandRef} />
-      <TV ref={tvRef} />
-      <DiningTable ref={tableRef} />
-      <DiningChairs ref={chairsRef} />
-      <Fridge ref={fridgeRef} />
-      <KitchenCabinets ref={cabinetsRef} />
-      <CoffeeTable ref={coffeeTableRef} />
-      <Bookshelf ref={bookshelfRef} />
-      <Plant ref={plantRef} />
-      <Microwave ref={microwaveRef} />
-      <Bed ref={bedRef} />
-      <SideTable ref={sideTableRef} />
-      <Carpet ref={carpetRef} />
-      <Stove ref={stoveRef} />
-      <WashingMachine ref={washerRef} />
-      <Sink ref={sinkRef} />
-      <Dishwasher ref={dishwasherRef} />
+      <Suspense fallback={null}>
+        <Sofa ref={sofaRef} />
+        <Lamp ref={lampRef} />
+        <TVStand ref={tvStandRef} />
+        <TV ref={tvRef} />
+        <DiningTable ref={tableRef} />
+        <DiningChairs ref={chairsRef} />
+        <Fridge ref={fridgeRef} />
+        <KitchenCabinets ref={cabinetsRef} />
+        <CoffeeTable ref={coffeeTableRef} />
+        <Bookshelf ref={bookshelfRef} />
+        <Plant ref={plantRef} />
+        <Microwave ref={microwaveRef} />
+        <Bed ref={bedRef} />
+        <SideTable ref={sideTableRef} />
+        <Carpet ref={carpetRef} />
+        <Stove ref={stoveRef} />
+        <WashingMachine ref={washerRef} />
+        <Sink ref={sinkRef} />
+        <Dishwasher ref={dishwasherRef} />
+      </Suspense>
 
       <ContactShadows
         position={[0, 0.01, 0]}

@@ -3,10 +3,11 @@ import {
   InteractiveObject,
   type InteractiveObjectHandle,
 } from '../InteractiveObject'
-import { createClayMaterial, screenMaterial } from '../materials'
+import { GLTFFurniture, PlaceholderBox, preloadFurnitureModel } from '../GLTFFurniture'
+import { MODEL_PATHS } from '../modelPaths'
 import { COUNTER_Y, KITCHEN_X, KITCHEN_Z } from '../layout'
 
-const bodyMat = createClayMaterial('#ececec')
+preloadFurnitureModel(MODEL_PATHS.microwave)
 
 export const Microwave = forwardRef<InteractiveObjectHandle>(
   function Microwave(_, ref) {
@@ -19,12 +20,14 @@ export const Microwave = forwardRef<InteractiveObjectHandle>(
         position={[KITCHEN_X, 0, KITCHEN_Z.microwave]}
         rotation={[0, -Math.PI, 0]}
       >
-        <mesh material={bodyMat} position={[0, COUNTER_Y + 0.16, 0]} castShadow>
-          <boxGeometry args={[0.48, 0.32, 0.55]} />
-        </mesh>
-        <mesh material={screenMaterial} position={[0.26, COUNTER_Y + 0.18, 0.03]} castShadow>
-          <boxGeometry args={[0.02, 0.2, 0.4]} />
-        </mesh>
+        <GLTFFurniture
+          src={MODEL_PATHS.microwave}
+          scale={1}
+          offset={[0, 0, 0]}
+          fallback={
+            <PlaceholderBox size={[0.48, 0.32, 0.55]} position={[0, COUNTER_Y + 0.16, 0]} />
+          }
+        />
       </InteractiveObject>
     )
   },

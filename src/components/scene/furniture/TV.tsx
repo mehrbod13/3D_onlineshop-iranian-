@@ -3,9 +3,10 @@ import {
   InteractiveObject,
   type InteractiveObjectHandle,
 } from '../InteractiveObject'
-import { createClayMaterial, screenMaterial } from '../materials'
+import { GLTFFurniture, PlaceholderBox, preloadFurnitureModel } from '../GLTFFurniture'
+import { MODEL_PATHS } from '../modelPaths'
 
-const frameMat = createClayMaterial('#2a2a2a')
+preloadFurnitureModel(MODEL_PATHS.tv)
 
 export const TV = forwardRef<InteractiveObjectHandle>(function TV(_, ref) {
   return (
@@ -16,18 +17,12 @@ export const TV = forwardRef<InteractiveObjectHandle>(function TV(_, ref) {
       label="تلویزیون"
       position={[0, 1.35, -4.2]}
     >
-      {/* Screen */}
-      <mesh material={screenMaterial} castShadow>
-        <boxGeometry args={[2.2, 1.25, 0.07]} />
-      </mesh>
-      {/* Frame bezel */}
-      <mesh material={frameMat} position={[0, 0, -0.05]} castShadow>
-        <boxGeometry args={[2.32, 1.35, 0.05]} />
-      </mesh>
-      {/* Stand neck on unit */}
-      <mesh material={frameMat} position={[0, -0.72, 0.06]} castShadow>
-        <boxGeometry args={[0.35, 0.08, 0.2]} />
-      </mesh>
+      <GLTFFurniture
+        src={MODEL_PATHS.tv}
+        scale={1}
+        offset={[0, 0, 0]}
+        fallback={<PlaceholderBox size={[2.2, 1.25, 0.07]} position={[0, 0, 0]} />}
+      />
     </InteractiveObject>
   )
 })

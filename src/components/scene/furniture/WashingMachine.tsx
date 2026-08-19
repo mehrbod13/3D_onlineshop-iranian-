@@ -3,10 +3,11 @@ import {
   InteractiveObject,
   type InteractiveObjectHandle,
 } from '../InteractiveObject'
-import { createClayMaterial, screenMaterial } from '../materials'
+import { GLTFFurniture, PlaceholderBox, preloadFurnitureModel } from '../GLTFFurniture'
+import { MODEL_PATHS } from '../modelPaths'
 import { BEDROOM } from '../layout'
 
-const bodyMat = createClayMaterial('#f0f0f0')
+preloadFurnitureModel(MODEL_PATHS.washingMachine)
 
 /** Laundry — bedroom corner, against right wall. */
 export const WashingMachine = forwardRef<InteractiveObjectHandle>(
@@ -20,12 +21,12 @@ export const WashingMachine = forwardRef<InteractiveObjectHandle>(
         position={BEDROOM.washer}
         rotation={[0, -Math.PI, 0]}
       >
-        <mesh material={bodyMat} position={[0, 0.45, 0]} castShadow receiveShadow>
-          <boxGeometry args={[0.6, 0.9, 0.6]} />
-        </mesh>
-        <mesh material={screenMaterial} position={[0.31, 0.52, 0]} castShadow>
-          <boxGeometry args={[0.03, 0.32, 0.32]} />
-        </mesh>
+        <GLTFFurniture
+          src={MODEL_PATHS.washingMachine}
+          scale={1}
+          offset={[0, 0, 0]}
+          fallback={<PlaceholderBox size={[0.6, 0.9, 0.6]} position={[0, 0.45, 0]} />}
+        />
       </InteractiveObject>
     )
   },

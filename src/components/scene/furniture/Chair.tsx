@@ -3,55 +3,46 @@ import {
   InteractiveObject,
   type InteractiveObjectHandle,
 } from '../InteractiveObject'
-import { createClayMaterial } from '../materials'
+import { GLTFFurniture, PlaceholderBox, preloadFurnitureModel } from '../GLTFFurniture'
+import { MODEL_PATHS } from '../modelPaths'
 
-const chairMat = createClayMaterial('#ebe4db')
+preloadFurnitureModel(MODEL_PATHS.chair)
 
-interface ChairProps {
+interface ChairSlotProps {
   position: [number, number, number]
   rotation?: [number, number, number]
 }
 
-function ChairMesh({ position, rotation = [0, 0, 0] }: ChairProps) {
+function ChairSlot({ position, rotation = [0, 0, 0] }: ChairSlotProps) {
   return (
     <group position={position} rotation={rotation}>
-      <mesh material={chairMat} position={[0, 0.45, 0]} castShadow receiveShadow>
-        <boxGeometry args={[0.42, 0.06, 0.42]} />
-      </mesh>
-      <mesh material={chairMat} position={[0, 0.72, -0.17]} castShadow>
-        <boxGeometry args={[0.4, 0.45, 0.05]} />
-      </mesh>
-      {(
-        [
-          [-0.15, 0.22, -0.15],
-          [0.15, 0.22, -0.15],
-          [-0.15, 0.22, 0.15],
-          [0.15, 0.22, 0.15],
-        ] as [number, number, number][]
-      ).map((pos, i) => (
-        <mesh key={i} material={chairMat} position={pos} castShadow>
-          <cylinderGeometry args={[0.025, 0.025, 0.44, 6]} />
-        </mesh>
-      ))}
+      <GLTFFurniture
+        src={MODEL_PATHS.chair}
+        scale={1}
+        offset={[0, 0, 0]}
+        fallback={<PlaceholderBox size={[0.42, 0.9, 0.42]} position={[0, 0.45, 0]} />}
+      />
     </group>
   )
 }
 
+// One model instance is reused for all four seats — GLTFFurniture clones
+// the cached scene per-instance, so this doesn't refetch anything.
 export const DiningChairs = forwardRef<InteractiveObjectHandle>(
   function DiningChairs(_, ref) {
-  return (
-    <InteractiveObject
-      ref={ref}
-      id="chairs-group"
-      category="chair"
-      label="صندلی"
-      position={[1.2, 0, 2.2]}
-    >
-      <ChairMesh position={[-0.85, 0, 0.55]} rotation={[0, Math.PI, 0]} />
-      <ChairMesh position={[0.85, 0, 0.55]} rotation={[0, Math.PI, 0]} />
-      <ChairMesh position={[-0.85, 0, -0.55]} />
-      <ChairMesh position={[0.85, 0, -0.55]} />
-    </InteractiveObject>
-  )
-},
+    return (
+      <InteractiveObject
+        ref={ref}
+        id="chairs-group"
+        category="chair"
+        label="صندلی"
+        position={[1.2, 0, 2.2]}
+      >
+        <ChairSlot position={[-0.85, 0, 0.55]} rotation={[0, Math.PI, 0]} />
+        <ChairSlot position={[0.85, 0, 0.55]} rotation={[0, Math.PI, 0]} />
+        <ChairSlot position={[-0.85, 0, -0.55]} />
+        <ChairSlot position={[0.85, 0, -0.55]} />
+      </InteractiveObject>
+    )
+  },
 )

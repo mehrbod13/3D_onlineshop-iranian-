@@ -3,13 +3,27 @@ import {
   InteractiveObject,
   type InteractiveObjectHandle,
 } from '../InteractiveObject'
+import { GLTFFurniture, preloadFurnitureModel } from '../GLTFFurniture'
+import { MODEL_PATHS } from '../modelPaths'
 import * as THREE from 'three'
+
+preloadFurnitureModel(MODEL_PATHS.carpet)
 
 const carpetMat = new THREE.MeshStandardMaterial({
   color: '#c4a882',
   roughness: 0.95,
   emissive: new THREE.Color('#000000'),
 })
+
+// Flat plane fallback — a placeholder box would look wrong for a rug lying
+// on the floor, so this keeps a thin ground-plane instead.
+function CarpetFallback() {
+  return (
+    <mesh rotation={[-Math.PI / 2, 0, 0]} material={carpetMat} receiveShadow>
+      <planeGeometry args={[3.5, 2.5]} />
+    </mesh>
+  )
+}
 
 export const Carpet = forwardRef<InteractiveObjectHandle>(function Carpet(_, ref) {
   return (
@@ -20,9 +34,12 @@ export const Carpet = forwardRef<InteractiveObjectHandle>(function Carpet(_, ref
       label="فرش"
       position={[-2, 0.02, -0.8]}
     >
-      <mesh rotation={[-Math.PI / 2, 0, 0]} material={carpetMat} receiveShadow>
-        <planeGeometry args={[3.5, 2.5]} />
-      </mesh>
+      <GLTFFurniture
+        src={MODEL_PATHS.carpet}
+        scale={1}
+        offset={[0, 0, 0]}
+        fallback={<CarpetFallback />}
+      />
     </InteractiveObject>
   )
 })
