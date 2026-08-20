@@ -200,6 +200,60 @@ const PRODUCT_CATALOG: Record<FurnitureCategory, ProductDraft[]> = {
       shop_link: 'https://www.digikala.com/search/?q=ظرفشویی',
     },
   ],
+  armchair: [
+    {
+      id: 'armchair-1',
+      title: 'مبل تک‌نفره راحتی مدل وگا',
+      price: 7_900_000,
+      image_url: 'https://picsum.photos/seed/armchair1/400/400',
+      shop_link: 'https://www.digikala.com/search/?q=مبل+تک+نفره',
+    },
+  ],
+  wardrobe: [
+    {
+      id: 'wardrobe-1',
+      title: 'کمد لباس دو درب MDF',
+      price: 16_500_000,
+      image_url: 'https://picsum.photos/seed/wardrobe1/400/400',
+      shop_link: 'https://www.digikala.com/search/?q=کمد+لباس',
+    },
+  ],
+  mirror: [
+    {
+      id: 'mirror-1',
+      title: 'آینه دیواری قاب‌دار',
+      price: 1_950_000,
+      image_url: 'https://picsum.photos/seed/mirror1/400/400',
+      shop_link: 'https://www.digikala.com/search/?q=آینه+دیواری',
+    },
+  ],
+  wallArt: [
+    {
+      id: 'wallart-1',
+      title: 'تابلو دیواری کنواس طرح انتزاعی',
+      price: 1_250_000,
+      image_url: 'https://picsum.photos/seed/wallart1/400/400',
+      shop_link: 'https://www.digikala.com/search/?q=تابلو+دیواری',
+    },
+  ],
+  chandelier: [
+    {
+      id: 'chandelier-1',
+      title: 'لوستر سقفی کریستال',
+      price: 5_400_000,
+      image_url: 'https://picsum.photos/seed/chandelier1/400/400',
+      shop_link: 'https://www.digikala.com/search/?q=لوستر',
+    },
+  ],
+  desk: [
+    {
+      id: 'desk-1',
+      title: 'میز تحریر ساده چوبی',
+      price: 3_600_000,
+      image_url: 'https://picsum.photos/seed/desk1/400/400',
+      shop_link: 'https://www.digikala.com/search/?q=میز+تحریر',
+    },
+  ],
 }
 
 /** Offline fallback when Digikala API is unreachable. */

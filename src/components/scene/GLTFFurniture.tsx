@@ -7,9 +7,10 @@ interface ModelProps {
   scale: number;
   offset: [number, number, number];
   autoFit?: [number, number, number];
+  verticalAnchor: "floor" | "center";
 }
 
-function Model({ src, scale, offset, autoFit }: ModelProps) {
+function Model({ src, scale, offset, autoFit, verticalAnchor }: ModelProps) {
   const { scene } = useGLTF(src);
 
   const prepared = useMemo(() => {
@@ -116,13 +117,24 @@ function Model({ src, scale, offset, autoFit }: ModelProps) {
 
     /*
      * ---------------------------------------------------------
-     * STEP 5: Put the bottom of the model on y = 0.
+     * STEP 5: Anchor the model vertically.
+     *
+     * "floor" (default) — sit the model's bottom on y = 0, for
+     * anything standing on the ground.
+     * "center" — center the model on y = 0 instead, for wall-mounted
+     * items (mirror, wall art, a hanging light) whose InteractiveObject
+     * position is already the intended on-wall height.
      * ---------------------------------------------------------
      */
 
     const centeredBox = new THREE.Box3().setFromObject(model);
 
-    model.position.y -= centeredBox.min.y;
+    if (verticalAnchor === "center") {
+      const midY = (centeredBox.min.y + centeredBox.max.y) / 2;
+      model.position.y -= midY;
+    } else {
+      model.position.y -= centeredBox.min.y;
+    }
 
     /*
      * ---------------------------------------------------------
@@ -142,7 +154,7 @@ function Model({ src, scale, offset, autoFit }: ModelProps) {
     }
 
     return root;
-  }, [scene, src, scale, autoFit]);
+  }, [scene, src, scale, autoFit, verticalAnchor]);
 
   return <primitive object={prepared} position={offset} />;
 }
@@ -194,6 +206,10 @@ interface GLTFFurnitureProps {
 
   autoFit?: [number, number, number];
 
+  /** "floor" (default) rests the model's base at y=0; "center" centers
+   *  it on y=0 instead — use this for wall-mounted items. */
+  verticalAnchor?: "floor" | "center";
+
   fallback?: ReactNode;
 }
 
@@ -202,12 +218,19 @@ export function GLTFFurniture({
   scale = 1,
   offset = [0, 0, 0],
   autoFit,
+  verticalAnchor = "floor",
   fallback = null,
 }: GLTFFurnitureProps) {
   return (
     <ModelErrorBoundary src={src} fallback={fallback}>
       <Suspense fallback={fallback}>
-        <Model src={src} scale={scale} offset={offset} autoFit={autoFit} />
+        <Model
+          src={src}
+          scale={scale}
+          offset={offset}
+          autoFit={autoFit}
+          verticalAnchor={verticalAnchor}
+        />
       </Suspense>
     </ModelErrorBoundary>
   );

@@ -25,6 +25,12 @@ export const DIGIKALA_SEARCH_QUERIES: Record<FurnitureCategory, string> = {
   washingMachine: 'ماشین لباسشویی',
   sink: 'سینک ظرفشویی',
   dishwasher: 'ماشین ظرفشویی',
+  armchair: 'مبل تک نفره',
+  wardrobe: 'کمد لباس',
+  mirror: 'آینه دیواری',
+  wallArt: 'تابلو دیواری',
+  chandelier: 'لوستر',
+  desk: 'میز تحریر',
 }
 
 interface DigikalaPrice {

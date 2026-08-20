@@ -25,6 +25,12 @@ import { Stove } from './furniture/Stove'
 import { WashingMachine } from './furniture/WashingMachine'
 import { Sink } from './furniture/Sink'
 import { Dishwasher } from './furniture/Dishwasher'
+import { Armchair } from './furniture/Armchair'
+import { Wardrobe } from './furniture/Wardrobe'
+import { Mirror } from './furniture/Mirror'
+import { WallArt } from './furniture/WallArt'
+import { Chandelier } from './furniture/Chandelier'
+import { Desk } from './furniture/Desk'
 import type { InteractiveObjectHandle } from './InteractiveObject'
 import { useInteractionStore } from '../../store/interactionStore'
 import { PlayerMovement } from './PlayerMovement'
@@ -63,6 +69,12 @@ export function ShowroomScene({ controlsEnabled }: ShowroomSceneProps) {
   const washerRef = useRef<InteractiveObjectHandle>(null)
   const sinkRef = useRef<InteractiveObjectHandle>(null)
   const dishwasherRef = useRef<InteractiveObjectHandle>(null)
+  const armchairRef = useRef<InteractiveObjectHandle>(null)
+  const wardrobeRef = useRef<InteractiveObjectHandle>(null)
+  const mirrorRef = useRef<InteractiveObjectHandle>(null)
+  const wallArtRef = useRef<InteractiveObjectHandle>(null)
+  const chandelierRef = useRef<InteractiveObjectHandle>(null)
+  const deskRef = useRef<InteractiveObjectHandle>(null)
 
   const exploring = controlsEnabled && !isModalOpen
 
@@ -86,6 +98,12 @@ export function ShowroomScene({ controlsEnabled }: ShowroomSceneProps) {
     washerRef,
     sinkRef,
     dishwasherRef,
+    armchairRef,
+    wardrobeRef,
+    mirrorRef,
+    wallArtRef,
+    chandelierRef,
+    deskRef,
   ]
 
   return (
@@ -131,6 +149,12 @@ export function ShowroomScene({ controlsEnabled }: ShowroomSceneProps) {
         <WashingMachine ref={washerRef} />
         <Sink ref={sinkRef} />
         <Dishwasher ref={dishwasherRef} />
+        <Armchair ref={armchairRef} />
+        <Wardrobe ref={wardrobeRef} />
+        <Mirror ref={mirrorRef} />
+        <WallArt ref={wallArtRef} />
+        <Chandelier ref={chandelierRef} />
+        <Desk ref={deskRef} />
       </Suspense>
 
       <ContactShadows

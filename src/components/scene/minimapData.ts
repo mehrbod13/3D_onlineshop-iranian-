@@ -35,4 +35,10 @@ export const MINIMAP_POINTS: MinimapPoint[] = [
   { category: 'washingMachine', x: BEDROOM.washer[0], z: BEDROOM.washer[2] },
   { category: 'sink', x: KITCHEN_X, z: KITCHEN_Z.sink },
   { category: 'dishwasher', x: KITCHEN_X, z: KITCHEN_Z.dishwasher },
+  { category: 'armchair', x: -1.3, z: -3.2 },
+  { category: 'wardrobe', x: 6.7, z: 3.3 },
+  { category: 'mirror', x: 6.9, z: 4.9 },
+  { category: 'wallArt', x: -3, z: -5.85 },
+  { category: 'chandelier', x: 1.2, z: 2.2 },
+  { category: 'desk', x: -6.3, z: -4.8 },
 ]

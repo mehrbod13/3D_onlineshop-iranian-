@@ -19,6 +19,12 @@ export type FurnitureCategory =
   | 'washingMachine'
   | 'sink'
   | 'dishwasher'
+  | 'armchair'
+  | 'wardrobe'
+  | 'mirror'
+  | 'wallArt'
+  | 'chandelier'
+  | 'desk'
 
 export type ProductSource = 'digikala' | 'mock'
 
@@ -65,6 +71,12 @@ export const CATEGORY_LABELS: Record<FurnitureCategory, string> = {
   washingMachine: 'ماشین لباسشویی',
   sink: 'سینک',
   dishwasher: 'ماشین ظرفشویی',
+  armchair: 'مبل تک‌نفره',
+  wardrobe: 'کمد لباس',
+  mirror: 'آینه',
+  wallArt: 'تابلو دیواری',
+  chandelier: 'لوستر',
+  desk: 'میز تحریر',
 }
 
 /** Format price in Tomans with Persian locale separators. */

@@ -26,4 +26,10 @@ export const MODEL_PATHS: Record<FurnitureCategory, string> = {
   washingMachine: '/models/washing-machine.glb',
   sink: '/models/sink.glb',
   dishwasher: '/models/dishwasher.glb',
+  armchair: '/models/armchair.glb',
+  wardrobe: '/models/wardrobe.glb',
+  mirror: '/models/mirror.glb',
+  wallArt: '/models/wall-art.glb',
+  chandelier: '/models/chandelier.glb',
+  desk: '/models/desk.glb',
 }
