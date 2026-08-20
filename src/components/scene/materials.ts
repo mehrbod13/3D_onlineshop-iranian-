@@ -28,14 +28,26 @@ export const screenMaterial = new THREE.MeshStandardMaterial({
 })
 
 export const floorMaterial = new THREE.MeshStandardMaterial({
-  color: '#ebe6df',
-  roughness: 0.95,
+  color: '#D1BB9B',
+  roughness: 0.82,
   metalness: 0,
 })
 
 export const wallMaterial = new THREE.MeshStandardMaterial({
-  color: '#faf8f5',
-  roughness: 0.92,
+  color: '#f2e4d3',
+  roughness: 0.95,
+  metalness: 0,
+})
+
+export const baseboardMaterial = new THREE.MeshStandardMaterial({
+  color: '#6b4a35',
+  roughness: 0.55,
+  metalness: 0.05,
+})
+
+export const ceilingMaterial = new THREE.MeshStandardMaterial({
+  color: '#ece0cf',
+  roughness: 0.95,
   metalness: 0,
 })
 

@@ -122,8 +122,8 @@ export function ShowroomScene({ controlsEnabled }: ShowroomSceneProps) {
         gl.shadowMap.type = THREE.PCFSoftShadowMap
       }}
     >
-      <color attach="background" args={['#e8eef5']} />
-      <fog attach="fog" args={['#e8eef5', 14, 32]} />
+      <color attach="background" args={['#f0dfc4']} />
+      <fog attach="fog" args={['#f0dfc4', 14, 32]} />
 
       <SceneLighting />
 
