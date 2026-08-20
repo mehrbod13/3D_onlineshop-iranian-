@@ -16,7 +16,7 @@ export const Wardrobe = forwardRef<InteractiveObjectHandle>(
         id="wardrobe-main"
         category="wardrobe"
         label="کمد لباس"
-        position={[4.5, 0, 3.3]}
+        position={[4.5, 0, 3.2]}
         rotation={[0, -Math.PI, 0]}
       >
         <GLTFFurniture

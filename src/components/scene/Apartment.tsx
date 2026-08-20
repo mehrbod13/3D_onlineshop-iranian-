@@ -1,4 +1,6 @@
 import { floorMaterial, wallMaterial, baseboardMaterial, ceilingMaterial } from './materials'
+import { Window } from './Window'
+import { Door } from './Door'
 
 const ROOM_WIDTH = 14
 const ROOM_DEPTH = 12
@@ -88,6 +90,45 @@ export function Apartment() {
       <mesh position={[0, WALL_HEIGHT, 0]} material={ceilingMaterial} receiveShadow>
         <boxGeometry args={[ROOM_WIDTH, 0.1, ROOM_DEPTH]} />
       </mesh>
+
+      {/* Living-room window — left exterior wall, flush against the inner
+          face. rotationY=Math.PI/2 turns the pane's default +Z-facing
+          normal to face world +X, i.e. into the room from this wall. */}
+      <Window
+        position={[-hw + WALL_THICKNESS / 2 + 0.01, 1.6, -1]}
+        rotationY={Math.PI / 2}
+        width={1.9}
+        height={1.5}
+        view="garden"
+      />
+
+      {/* Front (entrance) wall — the player spawns facing it. A decorative
+          door fills the doorway gap, with a window right next to it.
+          rotationY=Math.PI faces both into the room (-Z) from this wall. */}
+      <Door
+        position={[0, 0, hd - WALL_THICKNESS / 2 - 0.01]}
+        rotationY={Math.PI}
+        width={1.7}
+        height={2.15}
+      />
+      <Window
+        position={[-3.6, 1.6, hd - WALL_THICKNESS / 2 - 0.01]}
+        rotationY={Math.PI}
+        width={1.4}
+        height={1.7}
+        view="skyline"
+      />
+
+      {/* Bedroom window — back wall, curtains drawn open to the sides so
+          they frame it without cutting the light. */}
+      <Window
+        position={[hw - WALL_THICKNESS / 2 - 0.01, 1.8, 4.3]}
+        rotationY={-Math.PI / 2}
+        width={1.1}
+        height={1.5}
+        view="mountain"
+        curtains
+      />
     </group>
   )
 }
