@@ -22,6 +22,8 @@ export function StartOverlay({ onStart }: StartOverlayProps) {
         </button>
         <p className="mt-4 text-xs text-slate-500">
           WASD حرکت · کلیک یا E انتخاب · ESC آزاد کردن موس
+          <br></br><br></br>
+          ساخته شده به دست: آریا آقایی پور
         </p>
       </div>
     </div>
