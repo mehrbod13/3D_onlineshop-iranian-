@@ -107,14 +107,24 @@ async function fetchSearchUrl(url: string): Promise<Product[]> {
     clearTimeout(timeout)
   }
 }
-
 /**
  * Tries Vite proxy first, then direct API (some networks resolve in browser only).
+ *
+ * In a production build there's no server-side proxy to lean on (a plain
+ * fetch from a hosted app gets stuck in Digikala's bot-check redirect
+ * loop), so we skip straight to the caller's mock-data fallback instead
+ * of wasting ~10s on a call that will never succeed. Local dev
+ * (import.meta.env.DEV) still hits the real API through the Vite proxy,
+ * since that runs from your own machine's IP.
  */
 export async function fetchDigikalaProducts(
   category: FurnitureCategory,
   page = 1,
 ): Promise<Product[]> {
+  if (!import.meta.env.DEV) {
+    throw new Error('Digikala live fetch is dev-only — falling back to mock data')
+  }
+
   const query = encodeURIComponent(DIGIKALA_SEARCH_QUERIES[category])
   const path = `/v1/search/?q=${query}&page=${page}`
 
